@@ -819,6 +819,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            position: relative;
         }
         
         .mobile-nav {
@@ -866,6 +867,83 @@
             color: white;
             font-size: 2rem;
             cursor: pointer;
+        }
+        
+        /* User Dropdown Menu */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-dropdown-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .user-dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 300;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .user-dropdown-content.show {
+            display: block;
+            animation: dropdownFade 0.3s ease;
+        }
+        
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .user-dropdown-content a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .user-dropdown-content a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        .user-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-dropdown-content a i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
         }
         
         /* Enhanced Mobile Responsiveness */
@@ -973,6 +1051,11 @@
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .user-dropdown-content {
+                right: -10px;
+                min-width: 180px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1025,6 +1108,15 @@
                 width: 60px;
                 height: 60px;
                 font-size: 1.5rem;
+            }
+            
+            .user-dropdown-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .user-dropdown-content {
+                min-width: 160px;
             }
         }
 
@@ -1135,8 +1227,24 @@
                         <button class="btn btn-primary" id="signup-btn">Sign Up</button>
                     </div>
                     <div id="user-menu" style="display: none;">
-                        <span id="username-display"></span>
-                        <button class="btn btn-outline" id="logout-btn">Logout</button>
+                        <div class="user-dropdown">
+                            <button class="user-dropdown-btn">
+                                <span id="username-display"></span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="user-dropdown-content" id="user-dropdown">
+                                <a href="#" class="nav-link" data-page="dashboard">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                                <a href="#" class="nav-link" data-page="home">
+                                    <i class="fas fa-sticky-note"></i> Public Notes
+                                </a>
+                                <div style="border-top: 1px solid var(--light-gray); margin: 5px 0;"></div>
+                                <a href="#" id="logout-dropdown">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1155,6 +1263,9 @@
             </li>
             <li id="mobile-admin-nav" style="display: none;">
                 <a href="#" class="nav-link" data-page="admin">Admin Panel</a>
+            </li>
+            <li id="mobile-logout-nav" style="display: none;">
+                <a href="#" id="mobile-logout">Logout</a>
             </li>
         </ul>
     </div>
@@ -1200,7 +1311,11 @@
                 <p style="text-align: center; margin-top: 20px;">
                     Don't have an account? <a href="#" id="go-to-signup">Sign up here</a>
                 </p>
-               
+                <div style="margin-top: 20px; text-align: center; background: var(--primary-light); padding: 15px; border-radius: 8px;">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Demo Accounts:</p>
+                    <p><strong>Regular User:</strong> user@example.com / password</p>
+                    <p><strong>Admin:</strong> admin@example.com / admin123</p>
+                </div>
             </div>
         </section>
 
@@ -1463,6 +1578,8 @@
                 showPage(page);
                 // Close mobile menu if open
                 $('#mobile-nav').removeClass('active');
+                // Close dropdown if open
+                $('#user-dropdown').removeClass('show');
             });
             
             // Mobile menu handlers
@@ -1472,6 +1589,17 @@
             
             $('#close-mobile-menu').on('click', function() {
                 $('#mobile-nav').removeClass('active');
+            });
+            
+            // User dropdown handlers
+            $('.user-dropdown-btn').on('click', function(e) {
+                e.stopPropagation();
+                $('#user-dropdown').toggleClass('show');
+            });
+            
+            // Close dropdown when clicking outside
+            $(document).on('click', function() {
+                $('#user-dropdown').removeClass('show');
             });
             
             // Auth button handlers
@@ -1505,6 +1633,16 @@
             });
             
             $('#logout-btn').on('click', function() {
+                handleLogout();
+            });
+            
+            $('#logout-dropdown').on('click', function(e) {
+                e.preventDefault();
+                handleLogout();
+            });
+            
+            $('#mobile-logout').on('click', function(e) {
+                e.preventDefault();
                 handleLogout();
             });
             
@@ -2117,6 +2255,7 @@
                 $('#username-display').text(window.currentUser.name);
                 $('#user-nav').show();
                 $('#mobile-user-nav').show();
+                $('#mobile-logout-nav').show();
                 
                 if (window.currentUser.isAdmin) {
                     $('#admin-nav').show();
@@ -2137,6 +2276,7 @@
                 $('#admin-nav').hide();
                 $('#mobile-user-nav').hide();
                 $('#mobile-admin-nav').hide();
+                $('#mobile-logout-nav').hide();
             }
         }
 
