@@ -11,36 +11,38 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <style>
-        /* Your existing CSS remains the same */
+        /* Professional CSS with enhanced styling */
         :root {
-            --primary: #6C63FF;
-            --primary-dark: #5A52D5;
-            --secondary: #FF6584;
-            --accent: #36D1DC;
-            --success: #4CAF50;
-            --warning: #FF9800;
-            --danger: #F44336;
-            --light: #F8F9FA;
-            --dark: #212529;
-            --gray: #6C757D;
-            --light-gray: #E9ECEF;
-            --bg-color: #F5F7FB;
-            --text-color: #2D3748;
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #DBEAFE;
+            --secondary: #7C3AED;
+            --accent: #06B6D4;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --light: #F8FAFC;
+            --dark: #1E293B;
+            --gray: #64748B;
+            --light-gray: #E2E8F0;
+            --bg-color: #F8FAFC;
+            --text-color: #334155;
             --card-bg: #FFFFFF;
-            --header-bg: linear-gradient(135deg, #6C63FF, #5A52D5);
-            --footer-bg: #2D3748;
+            --header-bg: linear-gradient(135deg, #2563EB, #1D4ED8);
+            --footer-bg: #1E293B;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .dark-theme {
-            --bg-color: #121826;
+            --bg-color: #0F172A;
             --text-color: #E2E8F0;
             --card-bg: #1E293B;
-            --header-bg: linear-gradient(135deg, #4C4AC2, #3A38A8);
+            --header-bg: linear-gradient(135deg, #1E40AF, #1E3A8A);
             --footer-bg: #0F172A;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             --light-gray: #334155;
+            --primary-light: #1E3A8A;
         }
 
         .professional-theme {
@@ -57,6 +59,31 @@
             --secondary: #8B5CF6;
             --accent: #06B6D4;
             --header-bg: linear-gradient(135deg, #EC4899, #DB2777);
+        }
+
+        /* New Gradient Themes */
+        .ocean-theme {
+            --primary: #0EA5E9;
+            --primary-dark: #0284C7;
+            --secondary: #06B6D4;
+            --accent: #8B5CF6;
+            --header-bg: linear-gradient(135deg, #0EA5E9, #06B6D4, #8B5CF6);
+        }
+
+        .forest-theme {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #84CC16;
+            --accent: #F59E0B;
+            --header-bg: linear-gradient(135deg, #10B981, #84CC16, #F59E0B);
+        }
+
+        .sunset-theme {
+            --primary: #F97316;
+            --primary-dark: #EA580C;
+            --secondary: #EC4899;
+            --accent: #8B5CF6;
+            --header-bg: linear-gradient(135deg, #F97316, #EC4899, #8B5CF6);
         }
         
         * {
@@ -226,7 +253,7 @@
         }
         
         .btn-danger:hover {
-            background-color: #D32F2F;
+            background-color: #DC2626;
             transform: translateY(-2px);
         }
         
@@ -236,7 +263,17 @@
         }
         
         .btn-success:hover {
-            background-color: #388E3C;
+            background-color: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #D97706;
             transform: translateY(-2px);
         }
         
@@ -317,10 +354,22 @@
             transform-style: preserve-3d;
             perspective: 1000px;
             height: 280px;
+            animation: cardAppear 0.6s ease-out;
+        }
+
+        @keyframes cardAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         
         .note-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) rotateX(5deg);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
         
@@ -460,7 +509,7 @@
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
         
         textarea.form-control {
@@ -483,15 +532,15 @@
         }
         
         .alert-success {
-            background-color: #E8F5E9;
-            color: #2E7D32;
-            border: 1px solid #C8E6C9;
+            background-color: #ECFDF5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
         }
         
         .alert-danger {
-            background-color: #FFEBEE;
-            color: #C62828;
-            border: 1px solid #FFCDD2;
+            background-color: #FEF2F2;
+            color: #991B1B;
+            border: 1px solid #FECACA;
         }
         
         .user-info {
@@ -689,8 +738,6 @@
             padding: 0 10px;
         }
         
-       
-        
         .loading {
             display: inline-block;
             width: 20px;
@@ -705,19 +752,182 @@
             to { transform: rotate(360deg); }
         }
         
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .admin-actions button {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--light-gray);
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--light-gray);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--header-bg);
+            z-index: 200;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+            text-align: center;
+        }
+        
+        .mobile-nav li {
+            margin: 20px 0;
+        }
+        
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-mobile-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .notes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
-                gap: 15px;
+                flex-wrap: wrap;
             }
             
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 1.7rem;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .auth-buttons {
+                gap: 5px;
+            }
+            
+            .theme-selector {
+                margin-right: 5px;
+                padding: 6px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .theme-toggle {
+                margin-right: 5px;
+                width: 35px;
+                height: 35px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 0.9rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
             }
             
             .notes-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .note-card {
+                height: 250px;
             }
             
             .dashboard-actions {
@@ -725,8 +935,96 @@
                 gap: 15px;
             }
             
+            .stats-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .filter-container {
+                flex-wrap: wrap;
+            }
+            
+            .users-table {
+                overflow-x: auto;
+            }
+            
+            .users-table table {
+                min-width: 600px;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .header-content {
+                gap: 10px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .logo i {
+                font-size: 1.5rem;
+            }
+            
+            .theme-selector {
+                font-size: 0.8rem;
+                padding: 5px;
+            }
+            
             .page-title {
+                font-size: 1.7rem;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
                 font-size: 2rem;
+            }
+            
+            .note-card {
+                height: 230px;
+            }
+            
+            .note-front, .note-back {
+                padding: 20px;
+            }
+            
+            .note-title {
+                font-size: 1.2rem;
+            }
+            
+            .user-avatar-large {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
             }
         }
 
@@ -752,6 +1050,47 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Card hover animations */
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 12px;
+            z-index: 1;
+        }
+        
+        .note-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Pulse animation for new notes */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        
+        .note-card.new {
+            animation: pulse 2s infinite, cardAppear 0.6s ease-out;
+        }
+
+        /* Floating animation for cards */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .note-card.floating {
+            animation: float 6s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
@@ -762,6 +1101,11 @@
                     <i class="fas fa-sticky-note"></i>
                     <span>NotesHub</span>
                 </div>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
                 <nav>
                     <ul>
                         <li><a href="#" class="nav-link" data-page="home">Public Notes</a></li>
@@ -773,11 +1117,15 @@
                         </li>
                     </ul>
                 </nav>
+                
                 <div class="auth-buttons">
                     <select class="theme-selector" id="theme-selector">
-                        <option value="default">Default Theme</option>
+                        <option value="default">Default</option>
                         <option value="professional">Professional</option>
                         <option value="creative">Creative</option>
+                        <option value="ocean">Ocean</option>
+                        <option value="forest">Forest</option>
+                        <option value="sunset">Sunset</option>
                     </select>
                     <button class="theme-toggle" id="theme-toggle">
                         <i class="fas fa-moon"></i>
@@ -795,11 +1143,33 @@
         </div>
     </header>
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <button class="close-mobile-menu" id="close-mobile-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#" class="nav-link" data-page="home">Public Notes</a></li>
+            <li id="mobile-user-nav" style="display: none;">
+                <a href="#" class="nav-link" data-page="dashboard">My Dashboard</a>
+            </li>
+            <li id="mobile-admin-nav" style="display: none;">
+                <a href="#" class="nav-link" data-page="admin">Admin Panel</a>
+            </li>
+        </ul>
+    </div>
+
     <main class="container">
         <!-- Public Notes Page -->
         <section id="home" class="page active">
             <h1 class="page-title">Public Notes</h1>
             <p>Discover notes shared by our community of learners and thinkers.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="public-search" placeholder="Search public notes...">
+                <button class="btn btn-primary" id="search-public-btn">Search</button>
+            </div>
+            
             <div class="notes-grid" id="public-notes">
                 <!-- Notes will be dynamically added here -->
             </div>
@@ -830,11 +1200,7 @@
                 <p style="text-align: center; margin-top: 20px;">
                     Don't have an account? <a href="#" id="go-to-signup">Sign up here</a>
                 </p>
-                <div style="margin-top: 20px; text-align: center;">
-                    <p>Demo Accounts:</p>
-                    <p><strong>Regular User:</strong> user@example.com / password</p>
-                    <p><strong>Admin:</strong> admin@example.com / admin123</p>
-                </div>
+               
             </div>
         </section>
 
@@ -899,6 +1265,12 @@
                 </button>
             </div>
             
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All Notes</button>
+                <button class="filter-btn" data-filter="public">Public</button>
+                <button class="filter-btn" data-filter="private">Private</button>
+            </div>
+            
             <div class="notes-grid" id="user-notes">
                 <!-- User's notes will be dynamically added here -->
             </div>
@@ -911,7 +1283,7 @@
                 <div class="user-avatar" style="background-color: var(--danger);">A</div>
                 <div>
                     <h3>Super Administrator</h3>
-                    <p>admin@example.com</p>
+                    <p id="admin-email">admin@example.com</p>
                 </div>
             </div>
             
@@ -926,7 +1298,13 @@
                 </div>
             </div>
             
-            <h2 style="margin-bottom: 20px;">Users Management</h2>
+            <div class="dashboard-actions">
+                <h2>Users Management</h2>
+                <button class="btn btn-danger" id="delete-all-demo-data">
+                    <i class="fas fa-trash"></i> Delete All Demo Data
+                </button>
+            </div>
+            
             <div class="users-table">
                 <table>
                     <thead>
@@ -935,12 +1313,18 @@
                             <th>Email</th>
                             <th>Notes Count</th>
                             <th>Joined</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="users-table-body">
                         <!-- Users data will be dynamically added here -->
                     </tbody>
                 </table>
+            </div>
+            
+            <h2 style="margin: 30px 0 20px;">All Notes</h2>
+            <div class="notes-grid" id="admin-notes">
+                <!-- All notes will be dynamically added here -->
             </div>
         </section>
     </main>
@@ -975,7 +1359,23 @@
         </div>
     </div>
 
-   
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="confirm-title">Confirm Action</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="confirm-message">
+                Are you sure you want to perform this action?
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-danger" id="confirm-action">Confirm</button>
+                <button class="btn btn-outline close-modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <p>&copy; 2023 NotesHub - Professional Note Sharing Platform</p>
@@ -1061,6 +1461,17 @@
                 e.preventDefault();
                 const page = $(this).data('page');
                 showPage(page);
+                // Close mobile menu if open
+                $('#mobile-nav').removeClass('active');
+            });
+            
+            // Mobile menu handlers
+            $('#mobile-menu-btn').on('click', function() {
+                $('#mobile-nav').addClass('active');
+            });
+            
+            $('#close-mobile-menu').on('click', function() {
+                $('#mobile-nav').removeClass('active');
             });
             
             // Auth button handlers
@@ -1103,7 +1514,7 @@
             });
             
             $('.close-modal').on('click', function() {
-                $('#note-modal').removeClass('active');
+                $('.modal').removeClass('active');
             });
             
             $('#note-form').on('submit', function(e) {
@@ -1124,6 +1535,44 @@
             // Google auth
             $('#google-login, #google-signup').on('click', function() {
                 handleGoogleAuth();
+            });
+            
+            // Search functionality
+            $('#search-public-btn').on('click', function() {
+                const searchTerm = $('#public-search').val();
+                loadPublicNotes(searchTerm);
+            });
+            
+            $('#public-search').on('keypress', function(e) {
+                if (e.which === 13) {
+                    const searchTerm = $(this).val();
+                    loadPublicNotes(searchTerm);
+                }
+            });
+            
+            // Filter buttons
+            $('.filter-btn').on('click', function() {
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                const filter = $(this).data('filter');
+                filterUserNotes(filter);
+            });
+            
+            // Admin actions
+            $('#delete-all-demo-data').on('click', function() {
+                showConfirmModal(
+                    'Delete All Demo Data',
+                    'Are you sure you want to delete all demo users and notes? This action cannot be undone.',
+                    deleteAllDemoData
+                );
+            });
+            
+            // Confirmation modal
+            $('#confirm-action').on('click', function() {
+                if (window.confirmAction) {
+                    window.confirmAction();
+                    $('#confirm-modal').removeClass('active');
+                }
             });
         });
 
@@ -1159,7 +1608,13 @@
 
         // Set color theme
         function setColorTheme(theme) {
-            document.body.classList.remove('professional-theme', 'creative-theme');
+            document.body.classList.remove(
+                'professional-theme', 
+                'creative-theme',
+                'ocean-theme',
+                'forest-theme',
+                'sunset-theme'
+            );
             if (theme !== 'default') {
                 document.body.classList.add(`${theme}-theme`);
             }
@@ -1234,19 +1689,26 @@
         }
 
         // Load public notes from Firestore
-        function loadPublicNotes() {
+        function loadPublicNotes(searchTerm = '') {
             const publicNotesContainer = $('#public-notes');
             publicNotesContainer.html('<p class="fade-in">Loading public notes...</p>');
             
-            db.collection('notes')
+            let query = db.collection('notes')
                 .where('isPublic', '==', true)
-                .orderBy('createdAt', 'desc')
-                .get()
+                .orderBy('createdAt', 'desc');
+            
+            query.get()
                 .then((querySnapshot) => {
                     publicNotesContainer.empty();
                     
                     if (querySnapshot.empty) {
-                        publicNotesContainer.html('<p class="fade-in">No public notes available yet.</p>');
+                        publicNotesContainer.html(`
+                            <div class="empty-state fade-in">
+                                <i class="fas fa-sticky-note"></i>
+                                <h3>No public notes available yet</h3>
+                                <p>Be the first to share your knowledge with the community!</p>
+                            </div>
+                        `);
                         return;
                     }
                     
@@ -1255,6 +1717,13 @@
                     querySnapshot.forEach((doc) => {
                         const note = doc.data();
                         note.id = doc.id;
+                        
+                        // Apply search filter if provided
+                        if (searchTerm && 
+                            !note.title.toLowerCase().includes(searchTerm.toLowerCase()) && 
+                            !note.content.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return;
+                        }
                         
                         // Get user data for each note
                         const userPromise = db.collection('users').doc(note.userId).get()
@@ -1270,12 +1739,24 @@
                         notesPromises.push(userPromise);
                     });
                     
+                    // If no notes match the search term
+                    if (notesPromises.length === 0) {
+                        publicNotesContainer.html(`
+                            <div class="empty-state fade-in">
+                                <i class="fas fa-search"></i>
+                                <h3>No notes found</h3>
+                                <p>Try adjusting your search terms</p>
+                            </div>
+                        `);
+                        return;
+                    }
+                    
                     // Wait for all user data to load
                     Promise.all(notesPromises)
                         .then((notesWithUsers) => {
                             notesWithUsers.forEach(({ note, user }) => {
                                 const noteElement = `
-                                    <div class="note-card fade-in">
+                                    <div class="note-card fade-in floating">
                                         <div class="note-front">
                                             <h3 class="note-title">${note.title}</h3>
                                             <p class="note-content">${note.content}</p>
@@ -1319,18 +1800,21 @@
                 return;
             }
             
-            console.log('Loading notes for user:', window.currentUser.id);
-            
             db.collection('notes')
                 .where('userId', '==', window.currentUser.id)
                 .orderBy('createdAt', 'desc')
                 .get()
                 .then((querySnapshot) => {
-                    console.log('Query snapshot:', querySnapshot);
                     userNotesContainer.empty();
                     
                     if (querySnapshot.empty) {
-                        userNotesContainer.html('<p>You haven\'t created any notes yet.</p>');
+                        userNotesContainer.html(`
+                            <div class="empty-state fade-in">
+                                <i class="fas fa-sticky-note"></i>
+                                <h3>No notes yet</h3>
+                                <p>Create your first note to get started!</p>
+                            </div>
+                        `);
                         return;
                     }
                     
@@ -1339,68 +1823,106 @@
                         const note = doc.data();
                         note.id = doc.id;
                         userNotes.push(note);
-                        console.log('Found note:', note);
                     });
                     
-                    userNotes.forEach((note, index) => {
-                        const noteElement = `
-                            <div class="note-card stagger-item" style="transition-delay: ${index * 0.1}s">
-                                <div class="note-front">
-                                    <h3 class="note-title">${note.title}</h3>
-                                    <p class="note-content">${note.content}</p>
-                                    <div class="note-meta">
-                                        <span>${note.isPublic ? 'Public' : 'Private'}</span>
-                                        <span>${formatDate(note.createdAt?.toDate())}</span>
-                                    </div>
-                                    <div class="note-actions">
-                                        <button class="btn btn-primary edit-note" data-id="${note.id}">Edit</button>
-                                        <button class="btn btn-danger delete-note" data-id="${note.id}">Delete</button>
-                                    </div>
-                                </div>
-                                <div class="note-back">
-                                    <div class="user-avatar-large">${window.currentUser.avatar || window.currentUser.name.charAt(0)}</div>
-                                    <h3>${window.currentUser.name}</h3>
-                                    <p>${window.currentUser.email}</p>
-                                </div>
-                            </div>
-                        `;
-                        userNotesContainer.append(noteElement);
-                    });
+                    // Store notes for filtering
+                    window.userNotes = userNotes;
+                    
+                    // Display all notes by default
+                    filterUserNotes('all');
                     
                     // Update stats
                     $('#notes-count').text(userNotes.length);
                     $('#public-notes-count').text(userNotes.filter(note => note.isPublic).length);
-                    
-                    // Add event handlers for edit and delete buttons
-                    $('.edit-note').on('click', function(e) {
-                        e.stopPropagation();
-                        const noteId = $(this).data('id');
-                        openNoteModal(noteId);
-                    });
-                    
-                    $('.delete-note').on('click', function(e) {
-                        e.stopPropagation();
-                        const noteId = $(this).data('id');
-                        deleteNote(noteId);
-                    });
-                    
-                    // Add click event for card flip
-                    $('.note-card').on('click', function() {
-                        $(this).toggleClass('flipped');
-                    });
-                    
-                    // Initialize scroll animations for new elements
-                    initScrollAnimations();
                 })
                 .catch((error) => {
                     console.error('Error loading user notes:', error);
-                    console.error('Error details:', error.message, error.code);
                     userNotesContainer.html('<p>Error loading your notes. Please check console for details.</p>');
                 });
         }
 
+        // Filter user notes based on selection
+        function filterUserNotes(filter) {
+            const userNotesContainer = $('#user-notes');
+            userNotesContainer.empty();
+            
+            if (!window.userNotes || window.userNotes.length === 0) {
+                return;
+            }
+            
+            let filteredNotes = window.userNotes;
+            
+            if (filter === 'public') {
+                filteredNotes = window.userNotes.filter(note => note.isPublic);
+            } else if (filter === 'private') {
+                filteredNotes = window.userNotes.filter(note => !note.isPublic);
+            }
+            
+            if (filteredNotes.length === 0) {
+                userNotesContainer.html(`
+                    <div class="empty-state fade-in">
+                        <i class="fas fa-filter"></i>
+                        <h3>No ${filter} notes</h3>
+                        <p>You don't have any ${filter} notes yet.</p>
+                    </div>
+                `);
+                return;
+            }
+            
+            filteredNotes.forEach((note, index) => {
+                const noteElement = `
+                    <div class="note-card stagger-item" style="transition-delay: ${index * 0.1}s">
+                        <div class="note-front">
+                            <h3 class="note-title">${note.title}</h3>
+                            <p class="note-content">${note.content}</p>
+                            <div class="note-meta">
+                                <span>${note.isPublic ? 'Public' : 'Private'}</span>
+                                <span>${formatDate(note.createdAt?.toDate())}</span>
+                            </div>
+                            <div class="note-actions">
+                                <button class="btn btn-primary edit-note" data-id="${note.id}">Edit</button>
+                                <button class="btn btn-danger delete-note" data-id="${note.id}">Delete</button>
+                            </div>
+                        </div>
+                        <div class="note-back">
+                            <div class="user-avatar-large">${window.currentUser.avatar || window.currentUser.name.charAt(0)}</div>
+                            <h3>${window.currentUser.name}</h3>
+                            <p>${window.currentUser.email}</p>
+                        </div>
+                    </div>
+                `;
+                userNotesContainer.append(noteElement);
+            });
+            
+            // Add event handlers for edit and delete buttons
+            $('.edit-note').on('click', function(e) {
+                e.stopPropagation();
+                const noteId = $(this).data('id');
+                openNoteModal(noteId);
+            });
+            
+            $('.delete-note').on('click', function(e) {
+                e.stopPropagation();
+                const noteId = $(this).data('id');
+                deleteNote(noteId);
+            });
+            
+            // Add click event for card flip
+            $('.note-card').on('click', function() {
+                $(this).toggleClass('flipped');
+            });
+            
+            // Initialize scroll animations for new elements
+            initScrollAnimations();
+        }
+
         // Display admin panel data
         function displayAdminPanel() {
+            // Update admin email
+            if (window.currentUser) {
+                $('#admin-email').text(window.currentUser.email);
+            }
+            
             // Load users and notes counts
             Promise.all([
                 db.collection('users').get(),
@@ -1433,6 +1955,13 @@
                                     <td>${user.email}</td>
                                     <td>${userNotesCount}</td>
                                     <td>${formatDate(user.joinDate?.toDate())}</td>
+                                    <td>
+                                        <div class="admin-actions">
+                                            ${!user.isAdmin ? `
+                                                <button class="btn btn-danger btn-sm delete-user" data-id="${user.id}">Delete</button>
+                                            ` : ''}
+                                        </div>
+                                    </td>
                                 </tr>
                             `;
                             usersTableBody.append(userRow);
@@ -1443,12 +1972,120 @@
                 
                 // Wait for all note counts to be loaded
                 Promise.all(userPromises).then(() => {
+                    // Add event handlers for delete user buttons
+                    $('.delete-user').on('click', function() {
+                        const userId = $(this).data('id');
+                        showConfirmModal(
+                            'Delete User',
+                            'Are you sure you want to delete this user and all their notes? This action cannot be undone.',
+                            () => deleteUser(userId)
+                        );
+                    });
+                    
                     // Initialize scroll animations for new elements
                     initScrollAnimations();
                 });
             }).catch((error) => {
                 console.error('Error loading admin data:', error);
             });
+            
+            // Load all notes for admin
+            loadAllNotesForAdmin();
+        }
+
+        // Load all notes for admin panel
+        function loadAllNotesForAdmin() {
+            const adminNotesContainer = $('#admin-notes');
+            adminNotesContainer.html('<p>Loading all notes...</p>');
+            
+            db.collection('notes')
+                .orderBy('createdAt', 'desc')
+                .get()
+                .then((querySnapshot) => {
+                    adminNotesContainer.empty();
+                    
+                    if (querySnapshot.empty) {
+                        adminNotesContainer.html(`
+                            <div class="empty-state fade-in">
+                                <i class="fas fa-sticky-note"></i>
+                                <h3>No notes in the system</h3>
+                                <p>Users haven't created any notes yet.</p>
+                            </div>
+                        `);
+                        return;
+                    }
+                    
+                    const notesPromises = [];
+                    
+                    querySnapshot.forEach((doc) => {
+                        const note = doc.data();
+                        note.id = doc.id;
+                        
+                        // Get user data for each note
+                        const userPromise = db.collection('users').doc(note.userId).get()
+                            .then((userDoc) => {
+                                const user = userDoc.data();
+                                return { note, user };
+                            })
+                            .catch((error) => {
+                                console.error('Error loading user:', error);
+                                return { note, user: null };
+                            });
+                        
+                        notesPromises.push(userPromise);
+                    });
+                    
+                    // Wait for all user data to load
+                    Promise.all(notesPromises)
+                        .then((notesWithUsers) => {
+                            notesWithUsers.forEach(({ note, user }) => {
+                                const noteElement = `
+                                    <div class="note-card fade-in">
+                                        <div class="note-front">
+                                            <h3 class="note-title">${note.title}</h3>
+                                            <p class="note-content">${note.content}</p>
+                                            <div class="note-meta">
+                                                <span>By ${user ? user.name : 'Unknown User'}</span>
+                                                <span>${formatDate(note.createdAt?.toDate())}</span>
+                                            </div>
+                                            <div class="note-actions">
+                                                <button class="btn btn-danger delete-note-admin" data-id="${note.id}">Delete</button>
+                                            </div>
+                                        </div>
+                                        <div class="note-back">
+                                            <div class="user-avatar-large">${user ? user.name.charAt(0).toUpperCase() : 'U'}</div>
+                                            <h3>${user ? user.name : 'Unknown User'}</h3>
+                                            <p>${user ? user.email : 'No email'}</p>
+                                        </div>
+                                    </div>
+                                `;
+                                adminNotesContainer.append(noteElement);
+                                
+                                // Add click event for card flip
+                                $('.note-card').last().on('click', function() {
+                                    $(this).toggleClass('flipped');
+                                });
+                            });
+                            
+                            // Add event handlers for delete note buttons in admin panel
+                            $('.delete-note-admin').on('click', function(e) {
+                                e.stopPropagation();
+                                const noteId = $(this).data('id');
+                                showConfirmModal(
+                                    'Delete Note',
+                                    'Are you sure you want to delete this note? This action cannot be undone.',
+                                    () => deleteNote(noteId, true)
+                                );
+                            });
+                            
+                            // Initialize scroll animations for new elements
+                            initScrollAnimations();
+                        });
+                })
+                .catch((error) => {
+                    console.error('Error loading all notes:', error);
+                    adminNotesContainer.html('<p class="fade-in">Error loading notes. Please try again.</p>');
+                });
         }
 
         // Show specific page and hide others
@@ -1479,11 +2116,14 @@
                 $('#user-menu').show();
                 $('#username-display').text(window.currentUser.name);
                 $('#user-nav').show();
+                $('#mobile-user-nav').show();
                 
                 if (window.currentUser.isAdmin) {
                     $('#admin-nav').show();
+                    $('#mobile-admin-nav').show();
                 } else {
                     $('#admin-nav').hide();
+                    $('#mobile-admin-nav').hide();
                 }
                 
                 // Update user info in dashboard
@@ -1495,6 +2135,8 @@
                 $('#user-menu').hide();
                 $('#user-nav').hide();
                 $('#admin-nav').hide();
+                $('#mobile-user-nav').hide();
+                $('#mobile-admin-nav').hide();
             }
         }
 
@@ -1728,21 +2370,107 @@
         }
 
         // Delete note
-        function deleteNote(noteId) {
-            if (confirm('Are you sure you want to delete this note?')) {
-                db.collection('notes').doc(noteId).delete()
-                    .then(() => {
+        function deleteNote(noteId, isAdmin = false) {
+            db.collection('notes').doc(noteId).delete()
+                .then(() => {
+                    if (!isAdmin) {
                         displayUserNotes();
-                        loadPublicNotes();
-                        
-                        // Show success message
-                        showAlert('Note deleted successfully!', 'success');
-                    })
-                    .catch((error) => {
-                        console.error('Error deleting note:', error);
-                        showAlert('Error deleting note. Please try again.', 'error');
+                    } else {
+                        loadAllNotesForAdmin();
+                    }
+                    loadPublicNotes();
+                    
+                    // Show success message
+                    showAlert('Note deleted successfully!', 'success');
+                })
+                .catch((error) => {
+                    console.error('Error deleting note:', error);
+                    showAlert('Error deleting note. Please try again.', 'error');
+                });
+        }
+
+        // Delete user (admin only)
+        function deleteUser(userId) {
+            // First, delete all notes by this user
+            db.collection('notes')
+                .where('userId', '==', userId)
+                .get()
+                .then((querySnapshot) => {
+                    const deletePromises = [];
+                    querySnapshot.forEach((doc) => {
+                        deletePromises.push(doc.ref.delete());
                     });
-            }
+                    
+                    return Promise.all(deletePromises);
+                })
+                .then(() => {
+                    // Then delete the user document
+                    return db.collection('users').doc(userId).delete();
+                })
+                .then(() => {
+                    // Refresh admin panel
+                    displayAdminPanel();
+                    
+                    // Show success message
+                    showAlert('User and all their notes deleted successfully!', 'success');
+                })
+                .catch((error) => {
+                    console.error('Error deleting user:', error);
+                    showAlert('Error deleting user. Please try again.', 'error');
+                });
+        }
+
+        // Delete all demo data (admin only)
+        function deleteAllDemoData() {
+            // Get all demo users (non-admin users)
+            db.collection('users')
+                .where('isAdmin', '==', false)
+                .get()
+                .then((usersSnapshot) => {
+                    const deletePromises = [];
+                    
+                    usersSnapshot.forEach((userDoc) => {
+                        const userId = userDoc.id;
+                        
+                        // Delete all notes by this user
+                        const notesPromise = db.collection('notes')
+                            .where('userId', '==', userId)
+                            .get()
+                            .then((notesSnapshot) => {
+                                const noteDeletePromises = [];
+                                notesSnapshot.forEach((noteDoc) => {
+                                    noteDeletePromises.push(noteDoc.ref.delete());
+                                });
+                                return Promise.all(noteDeletePromises);
+                            });
+                        
+                        // Delete the user
+                        const userPromise = userDoc.ref.delete();
+                        
+                        deletePromises.push(notesPromise, userPromise);
+                    });
+                    
+                    return Promise.all(deletePromises);
+                })
+                .then(() => {
+                    // Refresh admin panel
+                    displayAdminPanel();
+                    
+                    // Show success message
+                    showAlert('All demo data deleted successfully!', 'success');
+                })
+                .catch((error) => {
+                    console.error('Error deleting demo data:', error);
+                    showAlert('Error deleting demo data. Please try again.', 'error');
+                });
+        }
+
+        // Show confirmation modal
+        function showConfirmModal(title, message, confirmAction) {
+            $('#confirm-title').text(title);
+            $('#confirm-message').text(message);
+            window.confirmAction = confirmAction;
+            $('#confirm-modal').addClass('active');
         }
 
         // Format date for display
